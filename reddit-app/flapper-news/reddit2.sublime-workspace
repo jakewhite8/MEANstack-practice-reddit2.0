@@ -492,18 +492,18 @@
 	"buffers":
 	[
 		{
-			"file": "index.html",
+			"file": "app.js",
 			"settings":
 			{
-				"buffer_size": 7,
+				"buffer_size": 1623,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app.js",
+			"file": "views/index.ejs",
 			"settings":
 			{
-				"buffer_size": 4,
+				"buffer_size": 3135,
 				"line_ending": "Unix"
 			}
 		}
@@ -532,6 +532,8 @@
 	},
 	"file_history":
 	[
+		"/Users/jakewhite/Documents/CS/MEAN/MEANstack-practice/reddit-app/flapper-news/views/index.ejs",
+		"/Users/jakewhite/Documents/CS/MEAN/MEANstack-practice/reddit-app/flapper-news/package.json",
 		"/Users/jakewhite/Documents/CS/real-talk/realtalk-3/js/grayscale.js",
 		"/Users/jakewhite/Documents/CS/real-talk/realtalk-3/js/realtalk.js",
 		"/Users/jakewhite/Documents/CS/real-talk/realtalk-3/css/grayscale.css",
@@ -657,9 +659,7 @@
 		"/Users/jakewhite/Documents/Senior/GEOG/mountain report/techtonic-plates.svg",
 		"/Users/jakewhite/Documents/Senior/special_topics/assignment1/assignment1.java",
 		"/Users/jakewhite/Documents/Senior/Special Topics/assignment1/assignment1.java",
-		"/Users/jakewhite/Documents/Senior/Operating Systems/helloworld.c",
-		"/Users/jakewhite/Documents/Senior/big_data/challenge-week-9/check8.html",
-		"/Users/jakewhite/Documents/Senior/big_data/challenge-week-10/d3/check4.html"
+		"/Users/jakewhite/Documents/Senior/Operating Systems/helloworld.c"
 	],
 	"find":
 	{
@@ -958,23 +958,25 @@
 			[
 				{
 					"buffer": 0,
-					"file": "index.html",
+					"file": "app.js",
 					"settings":
 					{
-						"buffer_size": 7,
+						"buffer_size": 1623,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7,
-								7
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -984,23 +986,23 @@
 				},
 				{
 					"buffer": 1,
-					"file": "app.js",
+					"file": "views/index.ejs",
 					"settings":
 					{
-						"buffer_size": 4,
+						"buffer_size": 3135,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4,
-								4
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/HTML/HTML.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
