@@ -43,10 +43,19 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 		.state('home', {
 			url: '/home',
 			templateUrl: '/home.html',
-			controller: 'MainCtrl'
-		});
+			controller: 'MainCtrl',
+			//- use resolve property of ui-router to ensure posts are loaded
+			//- allows the getAll() function to be called at an appropriate 
+			// 		time to load data
+			//- ensuring that anytime home state is entered, all posts are 
+			//		queried from backend before state actually finishes loading
+			resolve: {
+				postPromise: ['posts', function(posts){
+					return posts.getAll();
+				}]
+			}
+		})
 	//added a comments page for each post
-	$stateProvider
 		.state('posts', {
 			url: '/posts/{id}',
 			templateUrl: '/posts.html',
@@ -56,7 +65,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 }]);
 
 //factory to hold posts data
-app.factory('posts', [function(){
+app.factory('posts', ['$http',function($http){
 	var o = {
 		posts: [
 		  {title: 'post 1', upvotes: 5, 
@@ -70,6 +79,28 @@ app.factory('posts', [function(){
 		  {title: 'post 4', upvotes: 9, comments: []},
 		  {title: 'post 5', upvotes: 4, comments: []}
 		],
+	};
+
+	//get posts from backend
+	o.getAll = function(){
+		return $http.get('/posts').success(function(data){
+			//creates a deep copy of the returned data
+			// - variable in MainCtrl will also be updated
+			angular.copy(data, o.posts);
+		});
+	};
+	//method for creating new posts and saving them in the backend
+	o.create = function(post){
+		return $http.post('/posts', post).success(function(data){
+			o.posts.push(data);
+		});
+	};
+
+	//saving upvote action in backend
+	o.upvote = function(post){
+		return $http.put('/posts/' + post._id + '/upvote').success(function(data){
+			post.upvotes += 1;
+		});
 	};
 	return o;
 }])
@@ -85,22 +116,20 @@ app.controller('MainCtrl', ['$scope', 'posts', function($scope, posts){
 		//prevent user from submitting post with no title
 		if(!$scope.title || $scope.title === '') { alert('title required'); return; }
 		//create new post
-  		$scope.posts.push({
-  			title: $scope.title, 
-  			link: $scope.link, 
-  			upvotes: 0,
-  			comments: [
-  				{author:'Joe', body: 'Testing comment 1', upvotes: 0},
-  				{author:'Bob', body: 'Hellow world comment', upvotes: 0}
-  			]
+		//saves posts to server using create method from post service
+  		posts.create({
+  			title: $scope.title,
+  			link: $scope.link,
   		});
+  		
   		//reset input area for title and link in view
   		$scope.title = '';
   		$scope.link = '';
 	};
+	
 	//function used to increase upvote value
 	$scope.incrementUpvotes = function(post){
-		post.upvotes += 1;
+		post.upvote(post)
 	};
 }])
 
